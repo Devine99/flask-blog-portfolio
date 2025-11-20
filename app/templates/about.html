@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header class="masthead">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>About Me</h1>
+                    <span class="subheading">This is what I do.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        header.masthead {
+            background-image: url('{{ url_for("static", filename="assets/img/about-bg.jpg") }}');
+        }
+    </style>
+</header>
+
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <p>Welcome to Devine's Blog! I'm Devine, a passionate writer, technology enthusiast, and lifelong
+                    learner...</p>
+                <p>Through this blog, I explore topics ranging from web development and AI to productivity hacks...</p>
+                <p>When I'm not writing or coding, you'll find me hiking in the mountains...</p>
+
+                <div class="my-4">
+                    <h3>My Core Values</h3>
+                    <ul>
+                        <li><strong>Clarity over complexity</strong> - Breaking down technical concepts</li>
+                        <li><strong>Authenticity</strong> - Sharing genuine experiences and insights</li>
+                        <li><strong>Continuous learning</strong> - Always exploring new ideas and technologies</li>
+                        <li><strong>Community building</strong> - Creating space for meaningful discussions</li>
+                    </ul>
+                </div>
+
+                <div class="border-top pt-3 mt-4">
+                    <h4>Let's Connect</h4>
+                    <p>
+                        I'm always interested in hearing from readers. Find me on
+                        <a href="https://x.com/Bless001_" target="_blank">X</a>,
+                        <a href="https://github.com/Devine99" target="_blank">GitHub</a>, or
+                        <a href="{{ url_for('main.contact') }}">contact form</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

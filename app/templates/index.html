@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/home-bg.jpg') }}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Devine's Blog</h1>
+                    <span class="subheading">A collection of random musings.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show"
+                role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            {% for post in posts.items %}
+            <div class="post-preview">
+                <a href="{{ url_for('main.show_post', post_id=post.id) }}">
+                    <h2 class="post-title">{{ post.title }}</h2>
+                    <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+                </a>
+                <p class="post-meta">
+                    Posted by <a href="#">{{ post.author.name }}</a> on {{ post.date }}
+                    {% if current_user.is_authenticated and current_user.id == 1 %}
+                <form action="{{ url_for('main.delete_post', post_id=post.id) }}" method="POST" class="d-inline">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                    <button type="submit" class="btn text-danger btn-link p-0 m-0">✘</button>
+                </form>
+                {% endif %}
+                </p>
+            </div>
+            <hr class="my-4" />
+            {% endfor %}
+
+            <div class="d-flex justify-content-between mb-4">
+                {% if posts.has_prev %}
+                <a class="btn btn-primary text-uppercase" href="{{ url_for('main.home', page=posts.prev_num) }}">&larr;
+                    Newer Posts</a>
+                {% endif %}
+
+                {% if posts.has_next %}
+                <a class="btn btn-primary text-uppercase" href="{{ url_for('main.home', page=posts.next_num) }}">Older
+                    Posts &rarr;</a>
+                {% endif %}
+            </div>
+
+            {% if current_user.id == 1 %}
+            <div class="d-flex justify-content-end mb-4">
+                <a class="btn btn-success text-uppercase" href="{{ url_for('main.add_new_post') }}">Create New Post</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

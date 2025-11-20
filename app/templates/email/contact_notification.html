@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contact Form Submission</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            .header {
+                color: #2c5aa0;
+                border-bottom: 2px solid #2c5aa0;
+                padding-bottom: 10px;
+            }
+
+            .details {
+                background-color: #f9f9f9;
+                padding: 15px;
+                border-radius: 5px;
+                margin: 15px 0;
+            }
+
+            .message-box {
+                background-color: #f0f7ff;
+                padding: 15px;
+                border-left: 4px solid #2c5aa0;
+                margin: 15px 0;
+                white-space: pre-line;
+            }
+
+            .footer {
+                margin-top: 20px;
+                padding-top: 10px;
+                border-top: 1px solid #ddd;
+                font-size: 0.9em;
+                color: #777;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            td {
+                padding: 8px;
+                vertical-align: top;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1 class="header">New Contact Form Submission</h1>
+        <p>Hello,</p>
+        <p>A new contact form submission was received from the website. See the details below.</p>
+        <div class="details">
+            <table>
+                <tr>
+                    <td width="120"><strong>From:</strong></td>
+                    <td>{{ name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Email:</strong></td>
+                    <td><a href="mailto:{{ email }}">{{ email }}</a></td>
+                </tr>
+                <tr>
+                    <td><strong>Phone:</strong></td>
+                    <td>{% if number %}<a href="tel:{{ number }}">{{ number }}</a>{% else %}Not Provided{% endif %}</td>
+                </tr>
+                <tr>
+                    <td><strong>Submitted:</strong></td>
+                    <td>{{ submission_date }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="message-box">
+            <h2 class="header">Message:</h2>
+            <p>{{ message }}</p>
+        </div>
+        <p><strong>Next Step:</strong> Please reply to this email or contact {{ name }} directly at <a
+                href="mailto:{{ email }}">{{ email }}</a>.</p>
+        <div class="footer">
+            <p>Best regards,<br>Your Website Team</p>
+            <p><em>This is an automated message. Please do not reply to this email.</em></p>
+        </div>
+    </body>
+
+</html>

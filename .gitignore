@@ -1,0 +1,9 @@
+venv/
+.env
+*.pyc
+__pycache__/
+instance/
+.pytest_cache/
+.DS_Store
+blog.db
+logs/
